@@ -6,11 +6,39 @@ import Mypage from "@/components/Mypage";
 import Header from "@/components/Header";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import { createTheme } from "@mui/material/styles";
+import { grey } from "@mui/material/colors";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const Home: NextPage = () => {
   const [accessToken, setAccessToken] = useState<string>(""); // ログイン状態を管理
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const theme = createTheme({
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          "body::-webkit-scrollbar": {
+            width: "10px",
+            height: "10px",
+          },
+          "::-webkit-scrollbar": {
+            width: "8px",
+            height: "8px",
+          },
+          "::-webkit-scrollbar-track": {
+            background: grey[50],
+          },
+          "::-webkit-scrollbar-thumb": {
+            background: grey[400],
+            borderRadius: "3px",
+          },
+        },
+      },
+    },
+  });
 
   useEffect(() => {
     const storedToken =
@@ -36,10 +64,11 @@ const Home: NextPage = () => {
     setIsLogin(false);
   };
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading) return <CircularProgress sx={{ flex: 1 }} />;
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Head>
         <title>To Do App</title>
         <meta
@@ -52,14 +81,15 @@ const Home: NextPage = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          minHeight: "100vh",
+          height: "100vh",
+          overflowY: "auto",
         }}
       >
         <Header token={accessToken} onLogout={handleLogout} />
         {!isLogin && <Login onLogin={handleLogin} />}
         {isLogin && <Mypage token={accessToken} />}
       </Box>
-    </>
+    </ThemeProvider>
   );
 };
 

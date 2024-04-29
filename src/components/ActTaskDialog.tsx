@@ -193,7 +193,7 @@ export default function ActTaskDialog({
             : ""}
         </DialogTitle>
         <form onSubmit={handleSubmit}>
-          <DialogContent>
+          <Box sx={{ px: 4 }}>
             <TextField
               autoFocus
               required
@@ -203,11 +203,11 @@ export default function ActTaskDialog({
               defaultValue={title}
               variant="standard"
             />
-          </DialogContent>
-          <DialogContent sx={{ display: "flex", flexDirection: "row" }}>
+          </Box>
+          <Box sx={{ display: "flex", flexDirection: "row", px: 4 }}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Grid container justifyContent="space-between">
-                <Grid item xs={4}>
+                <Grid item md={4} xs={12} sx={{ pt: 3 }}>
                   <DatePicker
                     label="Select date"
                     value={selectedDate}
@@ -222,13 +222,15 @@ export default function ActTaskDialog({
                 </Grid>
                 <Grid
                   item
-                  xs={7}
+                  md={7}
+                  xs={12}
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    justifyContent: "center",
+                    justifyContent: "flex-start",
                     alignItems: "center",
                     flex: 1,
+                    pt: 3,
                   }}
                 >
                   <TimePicker
@@ -259,8 +261,8 @@ export default function ActTaskDialog({
                 </Grid>
               </Grid>
             </LocalizationProvider>
-          </DialogContent>
-          <DialogContent>
+          </Box>
+          <Box sx={{ px: 4, pt: 2 }}>
             <TextField
               label="memo"
               name="memo"
@@ -270,9 +272,13 @@ export default function ActTaskDialog({
               defaultValue={memo}
               variant="standard"
             />
-          </DialogContent>
-          <DialogActions>
-            <Grid container justifyContent="space-between">
+          </Box>
+          <Box>
+            <Grid
+              container
+              justifyContent="space-between"
+              sx={{ px: 2, py: 1 }}
+            >
               <Grid item>
                 {isEdit && (
                   <Button onClick={handleDeleteAction} color="error">
@@ -285,7 +291,7 @@ export default function ActTaskDialog({
                 <Button type="submit">Done</Button>
               </Grid>
             </Grid>
-          </DialogActions>
+          </Box>
         </form>
       </Dialog>
     </>

@@ -99,7 +99,12 @@ const Mypage = ({ token }: { token: string }) => {
           minHeight: "87.5vh",
         }}
       >
-        <Grid item xs={6} sx={{ display: "flex", flexDirection: "column" }}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{ display: "flex", flexDirection: "column" }}
+        >
           <Box sx={{ pt: 3, pl: 3, flex: 3 }}>
             <TodayCard
               data={todayTask}
@@ -116,7 +121,8 @@ const Mypage = ({ token }: { token: string }) => {
         </Grid>
         <Grid
           item
-          xs={6}
+          xs={12}
+          md={6}
           sx={{
             display: "flex",
             flexDirection: "column",
